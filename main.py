@@ -1,6 +1,7 @@
 import github
 
 import os
+import base64
 
 # TOKEN = os.environ["GITHUB_TOKEN"]
 # CUR_REPO = os.environ["GITHUB_REPOSITORY"]
@@ -39,9 +40,33 @@ class insightBranch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
             self.repo_obj.create_git_ref(self.ref, sha=default_branch_obj.commit.sha)
 
-    def content_upload(self, user_content, path="."):
+    def content_upload_from_string(self, user_content, path="."):
         """Upload the content to a specific path in the insight branch."""
 
+        # If fails to find the path, create one.
+        try:
+            file = self.repo_obj.get_contents(path, ref=self.insight_branch)
+            self.repo_obj.update_file(
+                path=path,
+                message="insight upload",
+                content=user_content,
+                branch=self.insight_branch,
+                sha=file.sha,
+            )
+            print("🚀 successfully updated a file!")
+        except github.GithubException:
+            self.repo_obj.create_file(
+                path=path,
+                message="insight upload",
+                content=user_content,
+                branch=self.insight_branch,
+            )
+            print("🚀 successfully created a file!")
+
+    def content_upload_from_file(self, source_file, source_branch, path="."):
+        """Upload content to a specific path in the insight branch from a file in another branch."""
+        file = self.repo_obj.get_contents(source_file, ref=source_branch)
+        user_content = base64.b64decode(file.content)
         # If fails to find the path, create one.
         try:
             file = self.repo_obj.get_contents(path, ref=self.insight_branch)
