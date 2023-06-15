@@ -11,6 +11,9 @@ jobs:
     steps:
           - name: Checkout code
             uses: actions/checkout@v2
+            with:
+              repository:  ${{ github.token }}
+              ref: "test-action"
           
           - name: echo
             run: echo "hello"
