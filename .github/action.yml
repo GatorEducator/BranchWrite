@@ -1,0 +1,25 @@
+name: "branch write"
+description: "write contents on a certain branch"
+inputs:
+  branch:  # id of input
+    description: "A branch name you want to upload content"
+    required: true
+  destination_path:
+    description: "The destination path where you want to upload content"
+    required: true
+  content:
+    description: "The content you want to upload"
+    required: false
+  source_branch_and_path:
+    description: "The source branch and path you want to fetch content from"
+    required: false
+  
+  
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.who-to-greet }}
