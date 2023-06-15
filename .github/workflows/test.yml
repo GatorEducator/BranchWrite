@@ -22,7 +22,7 @@ jobs:
             run: ls -a
 
           - name: Run custom action
-            uses: ./.github/actions/action.yml
+            uses: ./.github/actions
             with:
               branch: insight
               destination_path: cool/insight.json
