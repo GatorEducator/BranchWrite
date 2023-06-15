@@ -2,6 +2,7 @@ import github
 
 import os
 import base64
+import sys
 
 # TOKEN = os.environ["GITHUB_TOKEN"]
 # CUR_REPO = os.environ["GITHUB_REPOSITORY"]
@@ -40,12 +41,13 @@ class insightBranch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
             self.repo_obj.create_git_ref(self.ref, sha=default_branch_obj.commit.sha)
 
-    def content_upload_from_string(self, user_content, path="."):
+    def content_upload_from_string(self, path,user_content):
         """Upload the content to a specific path in the insight branch."""
 
         # If fails to find the path, create one.
         try:
             file = self.repo_obj.get_contents(path, ref=self.insight_branch)
+            # TODO: avoid updating while the content doesn't change
             self.repo_obj.update_file(
                 path=path,
                 message="insight upload",
@@ -63,8 +65,11 @@ class insightBranch:
             )
             print("🚀 successfully created a file!")
 
-    def content_upload_from_file(self, source_file, source_branch, path="."):
+    def content_upload_from_file(self, path, source_branch, source_file):
         """Upload content to a specific path in the insight branch from a file in another branch."""
+
+        if not source_branch:
+            source_branch = self.default_branch
         file = self.repo_obj.get_contents(source_file, ref=source_branch)
         user_content = base64.b64decode(file.content)
         # If fails to find the path, create one.
@@ -87,7 +92,28 @@ class insightBranch:
             )
             print("🚀 successfully created a file!")
 
+def main():
+    args = sys.argv
+    branch_name = args[1]
+    target_branch = insightBranch(branch_name)
+    target_path = args[2]
 
+    # args[3] decides which function to use and has three options: content, branch-and-file, env
+    source = args[3]
+    if source == "content":
+        content = args[4]
+        target_branch.content_upload_from_string(target_path,content)
+    elif source == "branch-and-path":
+        source_branch, source_path = args[4].split("/")[0], "/".join(args[4].split("/")[1:])
+        target_branch.content_upload_from_file(target_path,source_branch,source_path)
+    
+    else:
+        print("env will come in the future")
+        
+
+        
+        
+
+    
 if __name__ == "__main__":
-    branch = insightBranch()
-    branch.content_upload(user_content="hello", path="./cool/insight.json")
+    main()
