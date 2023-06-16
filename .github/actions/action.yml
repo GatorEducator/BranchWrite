@@ -34,12 +34,10 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-      -  python
-      - main.py
       - ${{ inputs.branch }}
       - ${{ inputs.destination-path }}
       - ${{ inputs.source }}
-      
+  entrypoint: main.py
   #     - ${{ inputs.content }}
   #       if: ${{ if inputs.content != null }}
 
