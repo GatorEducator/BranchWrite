@@ -24,8 +24,9 @@ class insightBranch:
             AUTHENTICATED_API.get_repo(CUR_REPO).default_branch
         )
         print( self.default_branch)
-        self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
 
+        self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
+        print(default_branch_obj.commit.sha)
         # Check if insight branch exists or not.
         found_insight_branch = False
         for branch in self.repo_obj.get_branches():
