@@ -13,7 +13,7 @@ import sys
 CUR_REPO = "hey-you-be-positive"
 OWNER = "allegheny-college-sandbox"
 
-AUTHENTICATED_API = github.Github("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")
+AUTHENTICATED_API = github.Github(sys.argv[5])
 
 
 class insightBranch:
