@@ -5,3 +5,4 @@ COPY ./ ./
 RUN pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir PyGithub
 
+ENTRYPOINT ["python", "main.py"]
