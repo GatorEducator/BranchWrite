@@ -61,7 +61,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo repo-token
+    - run: echo {{ inputs.repo-token }}
       shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
