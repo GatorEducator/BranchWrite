@@ -58,7 +58,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo $GITHUB_TOKEN
+    - run: echo ${{secrets.GITHUB_TOKEN}}
       shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
