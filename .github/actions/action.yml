@@ -31,14 +31,15 @@ outputs:
     description: 'The time we greeted you'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
   steps:
-    - name: My first step
-      uses: octo-org/action-name@main
-    - name: My backup step
-      if: ${{ failure() }}
-      uses: actions/heroku@1.0.0
+    - run: ${{ github.action_path }}/test/script.sh
+      shell: bash
+      
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+
   # steps:
   #   - name: Checkout code
   #     uses: actions/checkout@v2
