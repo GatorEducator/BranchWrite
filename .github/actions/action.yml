@@ -61,12 +61,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo ${{inputs.repo-token}} | sed 's/./& /g'
-      shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
     - run: python .github/actions/main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }} ${{ inputs.repo-token }}
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.repo-token }}
   # args:
   #   - ${{ inputs.branch }}
   #   - ${{ inputs.destination-path }}
