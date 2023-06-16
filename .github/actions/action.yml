@@ -39,16 +39,16 @@ runs:
       uses: actions/checkout@v2
     
     - name: run the script with content
-    run: |
-            python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
-    if: ${{ inputs.content }}
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+      if: ${{ inputs.content }}
 
     - name: run the script with source file
-    run: |
-            python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
-    if: ${{ branch-and-path }}
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+      if: ${{ branch-and-path }}
 
     - name: run the script with content
-    run: |
-            python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
-    if: ${{ inputs.env }}
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+      if: ${{ inputs.env }}
