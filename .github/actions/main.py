@@ -26,7 +26,6 @@ class insightBranch:
         print( self.default_branch)
 
         self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
-        print(default_branch_obj.commit.sha)
         # Check if insight branch exists or not.
         found_insight_branch = False
         for branch in self.repo_obj.get_branches():
@@ -36,6 +35,7 @@ class insightBranch:
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
+            print(default_branch_obj.commit.sha)
             self.repo_obj.create_git_ref(self.ref, sha=default_branch_obj.commit.sha)
 
     def content_upload_from_string(self, path,user_content):
