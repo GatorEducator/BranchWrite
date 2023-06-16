@@ -1,6 +1,5 @@
 import github
 
-import os
 import base64
 import sys
 

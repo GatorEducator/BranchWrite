@@ -26,31 +26,45 @@ inputs:
     default: null
   
   
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.branch }}
-    - ${{ inputs.destination-path }}
-    - ${{ inputs.source }}
-    - ${{ inputs.content }}
-  # steps:
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+#   args:
+#     - ${{ inputs.branch }}
+#     - ${{ inputs.destination-path }}
+#     - ${{ inputs.source }}
+#     - ${{ inputs.content }}
+#   # steps:
       
 
-    # - name: run the script with content
-    #   run: |
-    #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
-    #   if: ${{ inputs.content }}
+#     # - name: run the script with content
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+#     #   if: ${{ inputs.content }}
 
-    # - name: run the script with source file
-    #   run: |
-    #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
-    #   if: ${{ branch-and-path }}
+#     # - name: run the script with source file
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+#     #   if: ${{ branch-and-path }}
 
-    # - name: run the script with content
-    #   run: |
-    #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
-    #   if: ${{ inputs.env }}
+#     # - name: run the script with content
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+#     #   if: ${{ inputs.env }}
+
+runs:
+  using: composite
+  step:
+    - run: pwd && ls
+      shell: bash
+    - run: pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir requirements.txt
+      shell: bash
+    - run: python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+  # args:
+  #   - ${{ inputs.branch }}
+  #   - ${{ inputs.destination-path }}
+  #   - ${{ inputs.source }}
+  #   - ${{ inputs.content }}
