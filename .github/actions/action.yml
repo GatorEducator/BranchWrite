@@ -1,15 +1,69 @@
-name: 'Gatorgrade'
-description: 'Execute Gatorgrade'
-author: 'Katherine Burgess'
+name: branch write
+description: write contents on a certain branch
+author: Yanqiao Chen
+
+inputs:
+  branch:  # id of input
+    description: "A branch name you want to upload content"
+    required: true
+  destination-path:
+    description: "The destination path where you want to upload content"
+    required: true
+  source:
+    description: "The source where you want to upload from:env, content or branch-and-path"
+    required: true
+  content:
+    description: "The content you want to upload"
+    required: false
+    default: null
+  env:
+    description: "The environment variable where you want to fetch from"
+    required: false
+    default: null
+  branch-and-path:
+    description: "The source branch and path you want to fetch content from in a format of branch/path"
+    required: false
+    default: null
+  
+  
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+#   args:
+#     - ${{ inputs.branch }}
+#     - ${{ inputs.destination-path }}
+#     - ${{ inputs.source }}
+#     - ${{ inputs.content }}
+#   # steps:
+      
+
+#     # - name: run the script with content
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+#     #   if: ${{ inputs.content }}
+
+#     # - name: run the script with source file
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+#     #   if: ${{ branch-and-path }}
+
+#     # - name: run the script with content
+#     #   run: |
+#     #           python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+#     #   if: ${{ inputs.env }}
+
 runs:
   using: "composite"
   steps:
     - run: |
-        echo "::group::Install GatorGrade"
-        pip install gatorgrade
-        echo "::endgroup::"
-        gatorgrade
+        ls
+        pwd
       shell: bash
-branding:
-  icon: 'user-check'
-  color: 'green'
+  # args:
+  #   - ${{ inputs.branch }}
+  #   - ${{ inputs.destination-path }}
+  #   - ${{ inputs.source }}
+  #   - ${{ inputs.content }}
