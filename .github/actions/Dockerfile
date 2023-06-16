@@ -1,7 +1,9 @@
 FROM python:3.11
 COPY ./ ./
+WORKDIR .
 
 RUN pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir PyGithub
-RUN ls
-ENTRYPOINT ["python", "BranchWrite/.github/actions/main.py"]
+
+
+ENTRYPOINT ["python", "main.py"]
