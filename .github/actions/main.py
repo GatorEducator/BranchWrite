@@ -19,7 +19,7 @@ class insightBranch:
         """initialize an insight branch if it doesn't exist yet."""
         self.repo_obj = AUTHENTICATED_API.get_repo(CUR_REPO)
         self.insight_branch = branch_name
-        self.ref = "refs/heads/insight"
+        self.ref = "refs/heads/" + branch_name
         self.default_branch = (
             AUTHENTICATED_API.get_repo(CUR_REPO).default_branch
         )
@@ -30,7 +30,9 @@ class insightBranch:
         for branch in self.repo_obj.get_branches():
             if branch.name == branch_name:
                 found_insight_branch = True
-
+        for ref in self.repo_obj.get_git_refs():
+            print(ref.url)
+            print(ref.ref)
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
