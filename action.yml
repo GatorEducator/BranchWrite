@@ -1,0 +1,24 @@
+name: branch write
+description: write contents on a certain branch
+author: Yanqiao Chen
+
+inputs:
+  branch:  # id of input
+    description: "A branch name you want to upload content"
+    required: true
+  destination-path:
+    description: "The destination path where you want to upload content"
+    required: true
+  source:
+    description: "The source where you want to upload from:env, content or branch-and-path"
+    required: true
+  content:
+    description: "The string, path or environment variable where the the content stay"
+
+runs:
+  using: "composite"
+  steps:
+    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
+      shell: bash
+    - run: python .github/actions/main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+      shell: bash
