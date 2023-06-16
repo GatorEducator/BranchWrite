@@ -3,5 +3,5 @@ COPY ./ ./
 
 RUN pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir PyGithub
-
-ENTRYPOINT ["python", "BranchWrite/main.py"]
+RUN ls
+ENTRYPOINT ["python", "BranchWrite/.github/actions/main.py"]
