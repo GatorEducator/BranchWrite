@@ -9,23 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
-            with:
-              repository: Yanqiao4396/BranchWrite
-              ref: test-action
-          
-          - name: echo
-            run: echo "hello"
-          
-          - name: ls
-            run: ls -a
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          repository: Yanqiao4396/BranchWrite
+          ref: test-action
+      
+      - name: echo
+        run: echo "hello"
+      
+      - name: ls
+        run: ls -a
 
-          - name: Run custom action
-            uses: ./.github/actions
-            with:
-              branch: insight
-              destination-path: cool/insight.json
-              source: content
-              content: hello from action
+      - name: Run custom action
+        uses: ./.github/actions
+        with:
+          branch: insight
+          destination-path: cool/insight.json
+          source: content
+          content: hello from action
             
