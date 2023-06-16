@@ -23,8 +23,6 @@ jobs:
 
       - name: Run custom action
         uses: ./.github/actions
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           branch: insight
