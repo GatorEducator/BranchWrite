@@ -33,12 +33,12 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  # args:
-  #     -  python
-  #     - main.py
-  #     - ${{ inputs.branch }}
-  #     - ${{ inputs.destination-path }}
-  #     - ${{ inputs.source }}
+  args:
+      -  python
+      - main.py
+      - ${{ inputs.branch }}
+      - ${{ inputs.destination-path }}
+      - ${{ inputs.source }}
       
   #     - ${{ inputs.content }}
   #       if: ${{ if inputs.content != null }}
@@ -46,12 +46,7 @@ runs:
   #     - ${{ inputs.branch-and-path }}
   #       if:  ${{if inputs.branch-and-path != null }}
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        repository: Yanqiao4396/BranchWrite
-        ref: test-action
+  # steps:
       
 
     # - name: run the script with content
