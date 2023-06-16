@@ -36,7 +36,7 @@ class insightBranch:
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
-            self.repo_obj.create_git_ref("refs/heads/test-act", sha=default_branch_obj.commit.sha)
+            self.repo_obj.create_git_ref("refs/heads/test-action", sha=default_branch_obj.commit.sha)
 
     def content_upload_from_string(self, path,user_content):
         """Upload the content to a specific path in the insight branch."""
