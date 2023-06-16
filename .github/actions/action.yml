@@ -33,7 +33,7 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  steps: run the script
+  steps:
 
     - name: Checkout code
       uses: actions/checkout@v2
