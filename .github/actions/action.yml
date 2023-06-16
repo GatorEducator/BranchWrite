@@ -31,30 +31,20 @@ outputs:
     description: 'The time we greeted you'
 
 runs:
-  using: "composite"
+  using: 'docker'
+  image: 'Dockerfile'
   steps:
-    - run: ${{ github.action_path }}/test/script.sh
-      shell: bash
-      
-# runs:
-#   using: 'docker'
-#   image: 'Dockerfile'
+    - name: run the script with content
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+      if: ${{ inputs.content }}
 
-  # steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v2
-    
-  #   - name: run the script with content
-  #     run: |
-  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
-  #     if: ${{ inputs.content }}
+    - name: run the script with source file
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+      if: ${{ branch-and-path }}
 
-  #   - name: run the script with source file
-  #     run: |
-  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
-  #     if: ${{ branch-and-path }}
-
-  #   - name: run the script with content
-  #     run: |
-  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
-  #     if: ${{ inputs.env }}
+    - name: run the script with content
+      run: |
+              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+      if: ${{ inputs.env }}

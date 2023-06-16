@@ -25,7 +25,7 @@ jobs:
             uses: ./.github/actions
             with:
               branch: insight
-              destination_path: cool/insight.json
+              destination-path: cool/insight.json
               source: content
               content: hello from action
             
