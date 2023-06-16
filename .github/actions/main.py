@@ -28,6 +28,7 @@ class insightBranch:
         # Check if insight branch exists or not.
         found_insight_branch = False
         for branch in self.repo_obj.get_branches():
+            print(branch.name)
             if branch.name == branch_name:
                 found_insight_branch = True
 
