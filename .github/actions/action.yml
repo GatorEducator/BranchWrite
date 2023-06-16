@@ -37,7 +37,7 @@ runs:
       - ${{ inputs.branch }}
       - ${{ inputs.destination-path }}
       - ${{ inputs.source }}
-  entrypoint: main.py
+  entrypoint: python main.py
   #     - ${{ inputs.content }}
   #       if: ${{ if inputs.content != null }}
 
