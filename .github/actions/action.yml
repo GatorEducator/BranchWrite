@@ -32,26 +32,11 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args: ${{ if inputs.content != null && inputs.source == 'content' }}
+  args:
     - ${{ inputs.branch }}
     - ${{ inputs.destination-path }}
     - ${{ inputs.source }}
     - ${{ inputs.content }}
-    ${{ else if inputs.branch-and-path != null && inputs.source == 'branch-and-path' }}
-    - ${{ inputs.branch }}
-    - ${{ inputs.destination-path }}
-    - ${{ inputs.source }}
-    - ${{ inputs.branch-and-path }}
-    ${{ else if inputs.env != null && inputs.source == 'env' }}
-    - ${{ inputs.branch }}
-    - ${{ inputs.destination-path }}
-    - ${{ inputs.source }}
-    - ${{ inputs.env }}
-    ${{ else }}
-    - ${{ inputs.branch }}
-    - ${{ inputs.destination-path }}
-    - ${{ inputs.source }}
-    ${{ endif }}
   # steps:
       
 
