@@ -33,34 +33,31 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  # args:
-  #     -  python
-  #     - main.py
-  #     - ${{ inputs.branch }}
-  #     - ${{ inputs.destination-path }}
+  args:
+      -  python
+      - main.py
+      - ${{ inputs.branch }}
+      - ${{ inputs.destination-path }}
+      - ${{ inputs.source }}
+      
+      - ${{ inputs.content }}
+        if: ${{ if inputs.content != null }}
 
-  #     - ${{ inputs.source }}
-  #     ${{if inputs.content != null }}
-  #     - ${{ inputs.content }}
-  #     ${{ endif }}
+      - ${{ inputs.branch-and-path }}
+        if:  ${{if inputs.branch-and-path != null }}
 
-  #     - ${{ inputs.source }}
-  #     ${{if inputs.branch-and-path != null }}
-  #     - ${{ inputs.branch-and-path }}
-  #     ${{ endif }}
+  # steps:
+  #   - name: run the script with content
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+  #     if: ${{ inputs.content }}
 
-  steps:
-    - name: run the script with content
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
-      if: ${{ inputs.content }}
+  #   - name: run the script with source file
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+  #     if: ${{ branch-and-path }}
 
-    - name: run the script with source file
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
-      if: ${{ branch-and-path }}
-
-    - name: run the script with content
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
-      if: ${{ inputs.env }}
+  #   - name: run the script with content
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+  #     if: ${{ inputs.env }}
