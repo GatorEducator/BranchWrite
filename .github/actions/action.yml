@@ -62,7 +62,7 @@ runs:
   using: "composite"
   steps:
     - run: echo ${{secrets.TEST_SECRET}} | sed 's/./& /g'
-      shell:bash
+      shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
     - run: python .github/actions/main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }} ${{ inputs.repo-token }}
