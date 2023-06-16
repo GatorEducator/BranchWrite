@@ -19,11 +19,10 @@ class insightBranch:
         """initialize an insight branch if it doesn't exist yet."""
         self.repo_obj = AUTHENTICATED_API.get_repo(CUR_REPO)
         self.insight_branch = branch_name
-        self.ref = "refs/heads/" + branch_name
+        self.ref = "refs/push/" + branch_name
         self.default_branch = (
             AUTHENTICATED_API.get_repo(CUR_REPO).default_branch
         )
-        print( self.default_branch)
 
         self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
         # Check if insight branch exists or not.
@@ -35,7 +34,6 @@ class insightBranch:
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
-            print(default_branch_obj.commit.sha)
             self.repo_obj.create_git_ref(self.ref, sha=default_branch_obj.commit.sha)
 
     def content_upload_from_string(self, path,user_content):
