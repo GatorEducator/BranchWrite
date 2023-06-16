@@ -59,8 +59,9 @@ runs:
   using: "composite"
   steps:
     - run: |
-        ls
-        pwd
+        pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
+        python .github/actions/main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+
       shell: bash
   # args:
   #   - ${{ inputs.branch }}
