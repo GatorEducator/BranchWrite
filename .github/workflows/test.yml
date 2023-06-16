@@ -24,6 +24,7 @@ jobs:
       - name: Run custom action
         uses: ./.github/actions
         with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           branch: insight
           destination-path: cool/insight.json
           source: content

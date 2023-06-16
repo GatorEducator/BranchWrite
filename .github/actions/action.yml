@@ -3,6 +3,9 @@ description: write contents on a certain branch
 author: Yanqiao Chen
 
 inputs:
+  repo-token:
+    description: "A token with access to the working repository"
+    required: true
   branch:  # id of input
     description: "A branch name you want to upload content"
     required: true
@@ -58,7 +61,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo ${{ secrets.GITHUB_TOKEN }}
+    - run: echo repo-token
       shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
