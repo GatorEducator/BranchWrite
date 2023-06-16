@@ -33,18 +33,34 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  steps:
-    - name: run the script with content
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
-      if: ${{ inputs.content }}
+  args:
+      -  python
+      - main.py
+      - ${{ inputs.branch }}
+      - ${{ inputs.destination-path }}
 
-    - name: run the script with source file
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
-      if: ${{ branch-and-path }}
+      - ${{ inputs.source }}
+      ${{if inputs.content != null }}
+      - ${{ inputs.content }}
+      ${{ endif }}
 
-    - name: run the script with content
-      run: |
-              python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
-      if: ${{ inputs.env }}
+      - ${{ inputs.source }}
+      ${{if inputs.branch-and-path != null }}
+      - ${{ inputs.branch-and-path }}
+      ${{ endif }}
+
+  # steps:
+  #   - name: run the script with content
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.content }}
+  #     if: ${{ inputs.content }}
+
+  #   - name: run the script with source file
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source } ${{ branch-and-path }}
+  #     if: ${{ branch-and-path }}
+
+  #   - name: run the script with content
+  #     run: |
+  #             python main.py ${{ inputs.branch }} ${{ inputs.destination-path }} ${{ inputs.source }} ${{ inputs.env }}
+  #     if: ${{ inputs.env }}
