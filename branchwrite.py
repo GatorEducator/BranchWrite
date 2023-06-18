@@ -79,8 +79,12 @@ class BranchWrite:
                 branch=self.insight_branch,
             )
             print("🚀 successfully created a file!")
+
 def main():
     args = sys.argv
+    expected_arg_amount = 4
+    if len(args) != expected_arg_amount:
+        raise ValueError(f"4 arguments are expected, {expected_arg_amount - len(args)} from it")
     branch_name = args[1]
     target_path = args[2]
     target_branch = BranchWrite(branch_name, target_path)
@@ -99,6 +103,7 @@ def main():
     elif source == "env":
         env = args[4]
         target_branch.from_env(env)
+        
     else:
         raise ValueError("the 3rd positional argument receives unexpected value other than env, content or branch-and-path.")
         
