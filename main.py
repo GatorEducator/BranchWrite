@@ -1,20 +1,15 @@
 import github
-
 import os
 import base64
 import sys
 
-# TOKEN = os.environ["GITHUB_TOKEN"]
-# CUR_REPO = os.environ["GITHUB_REPOSITORY"]
-# OWNER = os.environ["GITHUB_REPOSITORY_OWNER"]
-
-# AUTHENTICATED_API = Github(TOKEN)
+TOKEN = os.environ["GITHUB_TOKEN"]
+CUR_REPO = os.environ["GITHUB_REPOSITORY"]
+OWNER = os.environ["GITHUB_REPOSITORY_OWNER"]
 
 
-CUR_REPO = "hey-you-be-positive"
-OWNER = "allegheny-college-sandbox"
 
-AUTHENTICATED_API = github.Github("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")
+AUTHENTICATED_API = github.Github(TOKEN)
 
 
 class insightBranch:
@@ -22,20 +17,19 @@ class insightBranch:
 
     def __init__(self, branch_name="insight") -> None:
         """initialize an insight branch if it doesn't exist yet."""
-        self.repo_obj = AUTHENTICATED_API.get_organization(OWNER).get_repo(CUR_REPO)
+        self.repo_obj = AUTHENTICATED_API.get_repo(CUR_REPO)
         self.insight_branch = branch_name
-        self.ref = ref = "refs/heads/" + branch_name
+        self.ref = "refs/heads/" + branch_name
         self.default_branch = (
-            AUTHENTICATED_API.get_organization(OWNER).get_repo(CUR_REPO).default_branch
+            AUTHENTICATED_API.get_repo(CUR_REPO).default_branch
         )
-        self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
 
+        self.default_branch_obj = self.repo_obj.get_branch(self.default_branch)
         # Check if insight branch exists or not.
         found_insight_branch = False
         for branch in self.repo_obj.get_branches():
             if branch.name == branch_name:
                 found_insight_branch = True
-
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
