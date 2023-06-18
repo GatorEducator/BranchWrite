@@ -33,7 +33,7 @@ class insightBranch:
         # Create insight branch if not.
         if not found_insight_branch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
-            self.repo_obj.create_issue("a","b")
+            self.repo_obj.create_issue("a","bc")
             self.repo_obj.create_git_ref("refs/heads/test-action", sha=default_branch_obj.commit.sha)
 
     def content_upload_from_string(self, path,user_content):
