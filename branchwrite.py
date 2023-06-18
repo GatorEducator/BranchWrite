@@ -96,9 +96,11 @@ def main():
         source_branch, source_path = args[4].split("/")[0], "/".join(args[4].split("/")[1:])
         target_branch.from_file(source_branch,source_path)
     
-    else:
+    elif source == "env":
         env = args[4]
         target_branch.from_env(env)
+    else:
+        raise ValueError("the 3rd positional argument receives unexpected value other than env, content or branch-and-path.")
         
 
         
