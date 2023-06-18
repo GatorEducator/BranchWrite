@@ -3,7 +3,7 @@ name: wow
 on:
   push:
     branches: [main, test-action]
-
+permissions: write-all
 jobs:
   build:
     runs-on: ubuntu-latest
