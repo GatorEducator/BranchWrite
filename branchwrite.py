@@ -12,14 +12,15 @@ OWNER = os.environ["GITHUB_REPOSITORY_OWNER"]
 AUTHENTICATED_API = github.Github(TOKEN)
 
 
-class insightBranch:
+class BranchWrite:
     """insight branch."""
 
-    def __init__(self, branch_name="insight") -> None:
+    def __init__(self, branch_name="insight", des_path = ".") -> None:
         """initialize an insight branch if it doesn't exist yet."""
         self.repo_obj = AUTHENTICATED_API.get_repo(CUR_REPO)
         self.insight_branch = branch_name
         self.ref = "refs/heads/" + branch_name
+        self.des_path = des_path
         self.default_branch = (
             AUTHENTICATED_API.get_repo(CUR_REPO).default_branch
         )
@@ -35,61 +36,47 @@ class insightBranch:
             default_branch_obj = self.repo_obj.get_branch(self.default_branch)
             self.repo_obj.create_git_ref(self.ref, sha=default_branch_obj.commit.sha)
 
-    def content_upload_from_string(self, path,user_content):
+    def from_string(self,content):
         """Upload the content to a specific path in the insight branch."""
+        self.__write_content(content)
 
-        # If fails to find the path, create one.
-        try:
-            file = self.repo_obj.get_contents(path, ref=self.insight_branch)
-            # TODO: avoid updating while the content doesn't change
-            self.repo_obj.update_file(
-                path=path,
-                message="insight upload",
-                content=user_content,
-                branch=self.insight_branch,
-                sha=file.sha,
-            )
-            print("🚀 successfully updated a file!")
-        except github.GithubException:
-            self.repo_obj.create_file(
-                path=path,
-                message="insight upload",
-                content=user_content,
-                branch=self.insight_branch,
-            )
-            print("🚀 successfully created a file!")
-
-    def content_upload_from_file(self, path, source_branch, source_file):
+    def from_file(self, source_branch, source_file):
         """Upload content to a specific path in the insight branch from a file in another branch."""
-
-        if not source_branch:
-            source_branch = self.default_branch
         file = self.repo_obj.get_contents(source_file, ref=source_branch)
-        user_content = base64.b64decode(file.content)
+        content = base64.b64decode(file.content)
+        self.__write_content(content)
+
+    def from_env(self, env):
+        """Upload content to a specific path in the insight branch from a environment variable."""
+        content = os.getenv(env)
+        if not content:
+            raise ValueError(f"Can't find {env}, exit the program.")
+        self.__write_content(content)
+
+    def __write_content(self,content):
         # If fails to find the path, create one.
         try:
-            file = self.repo_obj.get_contents(path, ref=self.insight_branch)
+            file = self.repo_obj.get_contents(self.des_path, ref=self.insight_branch)
             self.repo_obj.update_file(
-                path=path,
+                path=self.des_path,
                 message="insight upload",
-                content=user_content,
+                content=content,
                 branch=self.insight_branch,
                 sha=file.sha,
             )
             print("🚀 successfully updated a file!")
         except github.GithubException:
             self.repo_obj.create_file(
-                path=path,
+                path=self.des_path,
                 message="insight upload",
-                content=user_content,
+                content=content,
                 branch=self.insight_branch,
             )
             print("🚀 successfully created a file!")
-
 def main():
     args = sys.argv
     branch_name = args[1]
-    target_branch = insightBranch(branch_name)
+    target_branch = BranchWrite(branch_name)
     target_path = args[2]
 
     # args[3] decides which function to use and has three options: content, branch-and-file, env
