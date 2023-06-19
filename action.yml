@@ -22,7 +22,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-
+    - name: Checkout repository
+       uses: actions/checkout@v2
+       with: 
+         repository: Yanqiao4396/BranchWrite
+         ref: insight
     - run: pwd && echo ${{github.workspace}}
       shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
