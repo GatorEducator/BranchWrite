@@ -27,7 +27,7 @@ runs:
       with: 
         repository: Yanqiao4396/BranchWrite
         ref: main
-    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir requirements.txt
+    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir -r requirements.txt
       shell: bash
     - run: python branchwrite.py ${{ inputs.branch }} ${{ inputs.path }} ${{ inputs.source }} ${{ inputs.source-arg }}
       shell: bash
