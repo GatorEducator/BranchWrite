@@ -82,7 +82,7 @@ class BranchWrite:
 
 def main():
     args = sys.argv
-    expected_arg_amount = 4
+    expected_arg_amount = 5
     if len(args) != expected_arg_amount:
         raise ValueError(f"4 arguments are expected, {expected_arg_amount - len(args)} from it")
     branch_name = args[1]
