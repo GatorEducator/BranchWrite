@@ -33,7 +33,7 @@ runs:
 
     - run: pwd && echo ${{github.workspace}}
       shell: bash
-    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir /Yanqiao4396/BranchWrite/requirements.txt
+    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
       shell: bash
     - run: python branchwrite.py ${{ inputs.branch }} ${{ inputs.path }} ${{ inputs.source }} ${{ inputs.source-arg }}
       shell: bash
