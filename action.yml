@@ -28,3 +28,7 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.repo-token }}
+        
+branding:
+  icon: git-branch
+  color: blue
