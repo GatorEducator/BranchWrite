@@ -27,6 +27,9 @@ runs:
       with: 
         repository: Yanqiao4396/BranchWrite
         ref: insight
+    - name: Navigate to branch write repository
+      run: cd BranchWrite
+
     - run: pwd && echo ${{github.workspace}}
       shell: bash
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir requirements.txt
