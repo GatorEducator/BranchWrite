@@ -22,9 +22,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: pwd
+    - run: pwd && echo ${{github.workspace}}
       shell: bash
-     - run: echo ${{ github.workspace }}
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir requirements.txt
       shell: bash
     - run: python branchwrite.py ${{ inputs.branch }} ${{ inputs.path }} ${{ inputs.source }} ${{ inputs.source-arg }}
