@@ -30,7 +30,7 @@ runs:
 
     - run: pwd && echo ${{github.workspace}}
       shell: bash
-    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir PyGithub
+    - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir -r requirements.txt
       shell: bash
     - run: python branchwrite.py ${{ inputs.branch }} ${{ inputs.path }} ${{ inputs.source }} ${{ inputs.source-arg }}
       shell: bash
