@@ -113,5 +113,4 @@ def main():
 
     
 if __name__ == "__main__":
-    print(TOKEN)
-    main()
+    print("hi"+TOKEN)
