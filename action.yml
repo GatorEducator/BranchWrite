@@ -29,6 +29,7 @@ runs:
         ref: insight
     - name: Navigate to branch write repository
       run: cd BranchWrite
+      shell: bash
 
     - run: pwd && echo ${{github.workspace}}
       shell: bash
