@@ -14,7 +14,7 @@ see [action.yml](action.yml)
 
 ```yaml
 - name: 
-uses: actions # TODO: update to the release
+uses: GatorEducator/BranchWrite@v1
 with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
