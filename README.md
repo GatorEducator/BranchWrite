@@ -18,7 +18,7 @@ uses: GatorEducator/BranchWrite@v1
 with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
-    destination-path: cool/insight.json
+    path: cool/insight.json
     source: content
     content: hello from action
 ```
