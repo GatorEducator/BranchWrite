@@ -20,7 +20,7 @@ with:
     branch: insight
     path: cool/insight.json
     source: content
-    content: hello from action
+    source-arg: hello from action
 ```
 
 ## License
