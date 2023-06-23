@@ -25,7 +25,7 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with: 
-        repository: Yanqiao4396/BranchWrite
+        repository: GatorEducator/BranchWrite
         ref: main
     - run: pip install --no-cache-dir --upgrade pip  && pip install --no-cache-dir -r requirements.txt
       shell: bash
