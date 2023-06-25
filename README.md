@@ -12,9 +12,12 @@ see [action.yml](action.yml)
 
 ### Example
 
+#### content
 ```yaml
 - name: 
 uses: GatorEducator/BranchWrite@v1
+if:
+    always()
 with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
@@ -22,7 +25,35 @@ with:
     source: content
     source-arg: hello from action
 ```
+#### env
 
+```yaml
+- name: 
+uses: GatorEducator/BranchWrite@v1
+if:
+    always()
+with:
+    repo-token: ${{ secrets.GITHUB_TOKEN }}
+    branch: insight
+    path: cool/insight.json
+    source: env
+    source-arg: JSON_REPORT
+```
+
+#### branch + file
+
+```yaml
+- name: 
+uses: GatorEducator/BranchWrite@v1
+if:
+    always()
+with:
+    repo-token: ${{ secrets.GITHUB_TOKEN }}
+    branch: insight
+    path: cool/insight.json
+    source: branch-and-path
+    source-arg: main-branch/foo/bar.txt
+```
 ## License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
