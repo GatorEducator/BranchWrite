@@ -13,8 +13,7 @@
 ```yaml
 - name: Get current time
     uses: josStorer/get-current-time@v2
-    if:
-    always()
+    if: always()
     id: current-time
     with:
     format: YYYYMMDD-HH
