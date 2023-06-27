@@ -20,8 +20,7 @@
     utcOffset: "+08:00"
 - name: write branch
     uses: GatorEducator/BranchWrite@v1.0.1
-    if:
-    always()
+    if: always()
     with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
