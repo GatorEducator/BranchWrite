@@ -65,7 +65,7 @@ class BranchWrite:
             file = self.repo_obj.get_contents(self.des_path, ref=self.insight_branch)
             self.repo_obj.update_file(
                 path=self.des_path,
-                message="insight upload",
+                message="upload from action",
                 content=content,
                 branch=self.insight_branch,
                 sha=file.sha,
