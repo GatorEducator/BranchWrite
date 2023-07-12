@@ -24,7 +24,7 @@
     with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
-    path: insight/hello-action-${{steps.current-time.outputs.formattedTime}}.yml
+    path: insight/hello-action-${{steps.current-time.outputs.formattedTime}}.json
     source: env
     source-arg: JSON_REPORT
 ```
@@ -48,7 +48,7 @@ while `GatorGrade` throws any failing check, the whole step of `GatorGrade` in t
   with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     branch: insight
-    path: insight/hello-action.yml
+    path: insight/hello-action.json
     source: env
     source-arg: JSON_REPORT
 ```
