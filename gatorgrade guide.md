@@ -16,17 +16,17 @@
     if: always()
     id: current-time
     with:
-    format: YYYYMMDD-HH
-    utcOffset: "+08:00"
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
 - name: write branch
     uses: GatorEducator/BranchWrite@v1.0.1
     if: always()
     with:
-    repo-token: ${{ secrets.GITHUB_TOKEN }}
-    branch: insight
-    path: insight/hello-action-${{steps.current-time.outputs.formattedTime}}.json
-    source: env
-    source-arg: JSON_REPORT
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        branch: insight
+        path: insight/hello-action-${{steps.current-time.outputs.formattedTime}}.json
+        source: env
+        source-arg: JSON_REPORT
 ```
 
 ## Always Run BranchWrite
